@@ -34,9 +34,9 @@ import static org.springframework.http.MediaType.*;
 @Api(value = "/{{baseName}}", description = "the {{baseName}} API")
 {{>generatedAnnotation}}
 {{#operations}}
-public class {{classname}} {
-  {{#operation}}
+public interface {{classname}} {
 
+  {{#operation}}
   @ApiOperation(value = "{{{summary}}}", notes = "{{{notes}}}", response = {{{returnType}}}.class{{#returnContainer}}, responseContainer = "{{{returnContainer}}}"{{/returnContainer}}{{#hasAuthMethods}}, authorizations = {
     {{#authMethods}}@Authorization(value = "{{name}}"{{#isOAuth}}, scopes = {
       {{#scopes}}@AuthorizationScope(scope = "{{scope}}", description = "{{description}}"){{#hasMore}},
@@ -50,13 +50,11 @@ public class {{classname}} {
     {{#hasProduces}}produces = { {{#produces}}"{{mediaType}}"{{#hasMore}}, {{/hasMore}}{{/produces}} }, {{/hasProduces}}
     {{#hasConsumes}}consumes = { {{#consumes}}"{{mediaType}}"{{#hasMore}}, {{/hasMore}}{{/consumes}} },{{/hasConsumes}}
     method = RequestMethod.{{httpMethod}})
-  public ResponseEntity<{{>returnTypes}}> {{operationId}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},
-    {{/hasMore}}{{/allParams}})
-      throws NotFoundException {
-      // do some magic!
-      return new ResponseEntity<{{>returnTypes}}>(HttpStatus.OK);
-  }
+  ResponseEntity<{{>returnTypes}}> {{operationId}}({{#allParams}}{{>queryParams}}{{>pathParams}}{{>headerParams}}{{>bodyParams}}{{>formParams}}{{#hasMore}},
+    {{/hasMore}}{{/allParams}}) throws NotFoundException;
 
   {{/operation}}
 }
+
+
 {{/operations}}

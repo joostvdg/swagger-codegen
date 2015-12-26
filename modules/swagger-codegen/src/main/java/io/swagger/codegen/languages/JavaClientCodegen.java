@@ -195,7 +195,8 @@ public class JavaClientCodegen extends DefaultCodegen implements CodegenConfig {
         if (fullJavaUtil) {
             typeMapping.put("array", "java.util.List");
             typeMapping.put("map", "java.util.Map");
-            typeMapping.put("DateTime", "java.util.Date");
+            typeMapping.put("DateTime", "java.time.LocalDateTime");
+            typeMapping.put("Date", "java.time.LocalDate");
             typeMapping.remove("List");
             importMapping.remove("Date");
             importMapping.remove("Map");
